@@ -1,12 +1,10 @@
 import java.util.*;
 
-public class LinkedList
-{
+public class LinkedList {
     public Node head;
     public Node tail;
 
-    public LinkedList()
-    {
+    public LinkedList() {
         head = null;
         tail = null;
     }
@@ -95,8 +93,7 @@ public class LinkedList
         this.tail = null;
     }
 
-    public int count()
-    {
+    public int count() {
         int _count = 0;
         Node node = this.head;
         while (node != null) {
@@ -106,8 +103,7 @@ public class LinkedList
         return _count;
     }
 
-    public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
-    {
+    public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         Node node = this.head;
         boolean inserted = false;
         while (node != null) {
@@ -127,6 +123,24 @@ public class LinkedList
             this.head = _nodeToInsert;
             _nodeToInsert.next = oldHead;
         }
+    }
+
+    public static LinkedList merge(LinkedList lhs, LinkedList rhs) {
+        if (lhs.count() != rhs.count()) {
+            return null;
+        }
+
+        LinkedList merged = new LinkedList();
+
+        Node node1 = lhs.head;
+        Node node2 = rhs.head;
+        while (node1 != null) {
+            merged.addInTail(new Node(node1.value + node2.value));
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+
+        return merged;
     }
 
 }
@@ -153,6 +167,7 @@ class Test {
         test.testFindAll();
         test.testCount();
         test.testInsertAfter();
+        test.testMerge();
     }
 
     private void testRemoveByValue() throws Exception {
@@ -271,6 +286,29 @@ class Test {
         Node nodeToInsertAtTail = new Node(100);
         list.insertAfter(nodeAfterInList, nodeToInsertAtTail);
         assertTrue(list.tail == nodeToInsertAtTail, "Inserted node next element isn't expected node");
+    }
+
+    private void testMerge() throws Exception {
+        LinkedList list = new LinkedList();
+        list.addInTail(new Node(1));
+        list.addInTail(new Node(2));
+        list.addInTail(new Node(3));
+
+        LinkedList list2 = new LinkedList();
+        LinkedList mergedNull = LinkedList.merge(list, list2);
+
+        assertTrue(mergedNull == null, "Cannot merge non equal sized lists");
+
+        LinkedList list3 = new LinkedList();
+        list3.addInTail(new Node(1));
+        list3.addInTail(new Node(2));
+        list3.addInTail(new Node(3));
+
+        LinkedList mergedValues = LinkedList.merge(list, list3);
+        assertTrue(mergedValues.count() == 3, "Cannot merge non equal sized lists");
+        assertTrue(mergedValues.head.value == list.head.value + list3.head.value, "Cannot merge non equal sized lists");
+        assertTrue(mergedValues.head.next.value == list.head.next.value + list3.head.next.value, "Cannot merge non equal sized lists");
+        assertTrue(mergedValues.tail.value == list.tail.value + list3.tail.value, "Cannot merge non equal sized lists");
     }
 
     //MARK: - Helpers
