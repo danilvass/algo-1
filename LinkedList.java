@@ -159,7 +159,7 @@ class Node
 //MARK: - For now just simple class with throwable testing methods, but lets specify better way for this.
 class Test {
 
-    void test() throws Exception {
+    static void test() throws Exception {
         Test test = new Test();
         test.testRemoveByValue();
         test.testRemoveAllValues();
