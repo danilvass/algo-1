@@ -73,6 +73,7 @@ public class LinkedList {
             } else if (node.next != null && node.next.value == _value) {
                 if (node.next == tail) {
                     tail = node;
+                    node.next = node.next.next;
                 } else {
                     node.next = node.next.next;
                 }
