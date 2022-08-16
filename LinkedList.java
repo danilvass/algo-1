@@ -69,7 +69,10 @@ public class LinkedList {
         Node node = this.head;
         while (node != null) {
             if (node.value == _value) {
-                this.head = node.next;
+                if (node == head) {
+                    this.head = node.next;
+                }
+                node = node.next;
             } else if (node.next != null && node.next.value == _value) {
                 if (node.next == tail) {
                     tail = node;
@@ -77,8 +80,9 @@ public class LinkedList {
                 } else {
                     node.next = node.next.next;
                 }
+            } else {
+                node = node.next;
             }
-            node = node.next;
         }
         if (tail != null && tail.value == _value) {
             tail = null;
