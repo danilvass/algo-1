@@ -130,6 +130,13 @@ public class LinkedList {
         }
         if (!inserted) {
             Node oldHead = this.head;
+            if (this.head == this.tail) {
+                Node lastNode = _nodeToInsert;
+                while (lastNode != null) {
+                    this.tail = lastNode;
+                    lastNode = lastNode.next;
+                }
+            }
             this.head = _nodeToInsert;
             _nodeToInsert.next = oldHead;
         }
