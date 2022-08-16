@@ -49,7 +49,12 @@ public class LinkedList {
                 return true;
             }
         } else if (head != null && head.value == _value) {
-            head = head.next;
+            if (head == tail) {
+                head = null;
+                tail = null;
+            } else {
+                head = head.next;
+            }
             return true;
         }
         return false;
