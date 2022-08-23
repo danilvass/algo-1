@@ -80,7 +80,7 @@ public class DynArray<T>
     private void shrinkBufferSizeIfNeeded() {
         int lowerBound = (int) (capacity / DECREASE_BUFFER_RATIO);
         int decreasedCapacity = (int) Math.max(lowerBound, MINIMUM_CAPACITY);
-        if (decreasedCapacity <= count || capacity == decreasedCapacity) {
+        if (count - 1 >= decreasedCapacity || decreasedCapacity == capacity) {
             return;
         }
         capacity = decreasedCapacity;
