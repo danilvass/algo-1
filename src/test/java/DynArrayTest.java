@@ -103,6 +103,8 @@ class DynArrayTest {
         assertEquals(sut.capacity, 32);
         assertEquals(sut.count, 22);
         assertEquals(sut.getItem(21), 21);
+
+        //We should throw an exception when trying to access removed index;
         Assertions.assertThrows(Exception.class, () -> {
             sut.getItem(22);
         });
