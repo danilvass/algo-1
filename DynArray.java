@@ -1,5 +1,4 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class DynArray<T>
 {
@@ -66,7 +65,7 @@ public class DynArray<T>
     }
 
     private boolean canAddIntoBuffer() {
-        return capacity > count + 1;
+        return capacity > count;
     }
 
     private void extendBufferSizeIfNeeded() {
