@@ -1,8 +1,7 @@
 import java.lang.reflect.Array;
 
-public class DynArray<T>
-{
-    public T [] array;
+public class DynArray<T> {
+    public T[] array;
     public int count;
     public int capacity;
     Class clazz;
@@ -11,8 +10,7 @@ public class DynArray<T>
     private final double INCREASE_BUFFER_RATIO;
     private final double DECREASE_BUFFER_RATIO;
 
-    public DynArray(Class clz)
-    {
+    public DynArray(Class clz) {
         clazz = clz;
         count = 0;
         capacity = 16;
@@ -22,8 +20,7 @@ public class DynArray<T>
         makeArray(capacity);
     }
 
-    public void makeArray(int new_capacity)
-    {
+    public void makeArray(int new_capacity) {
         if (array == null) {
             array = (T[]) Array.newInstance(this.clazz, new_capacity);
         } else {
@@ -56,6 +53,7 @@ public class DynArray<T>
     }
 
     public void remove(int index) {
+        assertIndexInBounds(index, false);
         shrinkBufferSizeIfNeeded();
         T[] newArray = (T[]) Array.newInstance(this.clazz, capacity);
         System.arraycopy(array, 0, newArray, 0, index);
