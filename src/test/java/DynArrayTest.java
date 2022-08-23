@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DynArrayTest {
 
     @org.junit.jupiter.api.Test
-    void getItem() {
+    void test_getItem() {
         DynArray<Integer> sut = createSUT(0);
         sut.append(10);
         assertEquals(sut.getItem(0), 10);
@@ -25,7 +25,7 @@ class DynArrayTest {
     }
 
     @org.junit.jupiter.api.Test
-    void append() {
+    void test_append() {
         DynArray<Integer> sut = createSUT(0);
         assertEquals(sut.capacity, 16);
         assertEquals(sut.count, 0);
@@ -51,7 +51,7 @@ class DynArrayTest {
     }
 
     @org.junit.jupiter.api.Test
-    void insert() {
+    void test_insert() {
         DynArray<Integer> sut = createSUT(0);
         assertEquals(sut.capacity, 16);
         assertEquals(sut.count, 0);
@@ -87,14 +87,10 @@ class DynArrayTest {
     }
 
     @org.junit.jupiter.api.Test
-    void remove() {
+    void test_remove() {
         DynArray<Integer> sut = createSUT(23);
         assertEquals(sut.capacity, 32);
         assertEquals(sut.count, 23);
-        assertEquals(sut.getItem(22), 22);
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.getItem(23);
-        });
 
         //Current capacity is 32 and current count is 23;
         //after removing 23rd element count will be 22, which is NOT less than 21 (32 * 1.5)
