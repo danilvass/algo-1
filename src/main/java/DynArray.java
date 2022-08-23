@@ -10,6 +10,7 @@ public class DynArray<T>
     private final double MINIMUM_CAPACITY;
     private final double INCREASE_BUFFER_RATIO;
     private final double DECREASE_BUFFER_RATIO;
+    private final double MINIMUM_OCCUPANCY_PERCENTAGE;
 
     public DynArray(Class clz)
     {
@@ -19,6 +20,7 @@ public class DynArray<T>
         MINIMUM_CAPACITY = 16;
         INCREASE_BUFFER_RATIO = 2;
         DECREASE_BUFFER_RATIO = 1.5;
+        MINIMUM_OCCUPANCY_PERCENTAGE = 0.5;
         makeArray(capacity);
     }
 
@@ -79,11 +81,12 @@ public class DynArray<T>
     }
 
     private void shrinkBufferSizeIfNeeded() {
-        int lowerBound = (int) (capacity / DECREASE_BUFFER_RATIO);
-        int decreasedCapacity = (int) Math.max(lowerBound, MINIMUM_CAPACITY);
-        if (count - 1 >= decreasedCapacity || decreasedCapacity == capacity) {
+        int minimumOccupancy = (int) (capacity * MINIMUM_OCCUPANCY_PERCENTAGE);
+        if (count - 1 >= minimumOccupancy) {
             return;
         }
+        int decreasedCapacity = (int) (capacity / DECREASE_BUFFER_RATIO);
+        decreasedCapacity = (int) Math.max(decreasedCapacity, MINIMUM_CAPACITY);
         capacity = decreasedCapacity;
         makeArray(decreasedCapacity);
     }

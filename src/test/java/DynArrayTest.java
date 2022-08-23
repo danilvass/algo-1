@@ -83,7 +83,7 @@ class DynArrayTest {
         assertEquals(sut.count, 23);
 
         //Current capacity is 32 and current count is 23;
-        //after removing 23rd element count will be 22, which is NOT less than 21 (32 * 1.5)
+        //after removing 23rd element count will be 22, which is NOT less than 21 (32 * 0.5)
         //so we should not decrease capacity
         sut.remove(22);
         assertEquals(sut.capacity, 32);
@@ -94,7 +94,7 @@ class DynArrayTest {
         Assertions.assertThrows(Exception.class, () -> sut.getItem(22));
 
         //Current capacity is 32 and current count is 22;
-        //after removing 22nd element count will be 21, which is NOT less than 21 (32 * 1.5)
+        //after removing 22nd element count will be 21, which is NOT less than 21 (32 * 0.5)
         //so we should not decrease capacity
         sut.remove(21);
         assertEquals(sut.capacity, 32);
@@ -102,45 +102,59 @@ class DynArrayTest {
         Assertions.assertThrows(Exception.class, () -> sut.getItem(21));
 
         //Current capacity is 32 and current count is 21;
-        //after removing 21st element count will be 20, which is LESS than 21 (32 * 1.5)
-        //so we should decrease capacity to 21 (32 * 1.5)
+        //after removing 21st element count will be 20, which is NOT LESS than 16 (32 * 0.5)
+        //so we should not decrease capacity
         sut.remove(20);
-        assertEquals(sut.capacity, 21);
+        assertEquals(sut.capacity, 32);
         assertEquals(sut.count, 20);
         Assertions.assertThrows(Exception.class, () -> sut.getItem(20));
 
-        //Current capacity is 21 and current count is 20;
+        //Current capacity is 32 and current count is 20;
         //removing elements at positions: 19, 18, 17, 16;
-        //comparing capacity with MAX(16, (21 * 1.5) == 14) -> 16)
+        //comparing capacity with MAX(16, (21 * 0.5) == 10) -> 16)
         //since count in every iteration is not less than 16, capacity should NOT be decreased
         for (int i = 19; i >= 16 ; i--) {
             sut.remove(i);
-            assertEquals(sut.capacity, 21);
+            assertEquals(sut.capacity, 32);
             final int _i = i;
             Assertions.assertThrows(Exception.class, () -> sut.getItem(_i));
         }
-        assertEquals(sut.capacity, 21);
+        assertEquals(sut.capacity, 32);
         assertEquals(sut.count, 16);
 
-        //Current capacity is 21 and current count is 16;
-        //after removing 16th element count will be 15, which is LESS than 16 (min threshold)
-        //so we should decrease capacity to 16
+        //Current capacity is 32 and current count is 16;
+        //after removing 16th element count will be 15, which is LESS than 16
+        //so we should decrease capacity to 21 (32 / 1.5)
         sut.remove(15);
-        assertEquals(sut.capacity, 16);
+        assertEquals(sut.capacity, 21);
         assertEquals(sut.count, 15);
 
         //Removing all remaining elements; capacity should NOT be decreased.
-        for (int i = 14; i >= 0; i--) {
+        for (int i = 14; i >= 10; i--) {
             sut.remove(i);
-            assertEquals(sut.capacity, 16);
+            assertEquals(21, sut.capacity);
             assertEquals(sut.count, i);
         }
+        assertEquals(sut.capacity, 21);
+        assertEquals(sut.count, 10);
+
+        sut.remove(0);
         assertEquals(sut.capacity, 16);
-        assertEquals(sut.count, 0);
+        assertEquals(sut.count, 9);
 
         //When incorrect index are passed to remove function, error should be thrown
         Assertions.assertThrows(Exception.class, () -> sut.remove(20));
         Assertions.assertThrows(Exception.class, () -> sut.remove(-1));
+    }
+
+    @org.junit.jupiter.api.Test
+    void test_remove_more_elements() {
+        DynArray<Integer> sut = createSUT(1048);
+        assertEquals(sut.capacity, 2048);
+        assertEquals(sut.count, 1048);
+        sut.remove(0);
+        assertEquals(sut.count, 1047);
+        assertEquals(sut.capacity, 2048);
     }
 
     private DynArray<Integer> createSUT(int numberOfElements) {
