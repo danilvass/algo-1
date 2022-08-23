@@ -19,9 +19,7 @@ class DynArrayTest {
         assertEquals(sut.getItem(1), 20);
         assertEquals(sut.getItem(2), 30);
 
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.getItem(3);
-        });
+        Assertions.assertThrows(Exception.class, () -> sut.getItem(3));
     }
 
     @org.junit.jupiter.api.Test
@@ -77,13 +75,9 @@ class DynArrayTest {
         assertEquals(sut.getItem(16), 16);
 
         //When incorrect index are passed to remove function, error should be thrown
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.insert(1, 99);
-        });
+        Assertions.assertThrows(Exception.class, () -> sut.insert(1, 99));
 
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.insert(1, -1);
-        });
+        Assertions.assertThrows(Exception.class, () -> sut.insert(1, -1));
     }
 
     @org.junit.jupiter.api.Test
@@ -101,9 +95,7 @@ class DynArrayTest {
         assertEquals(sut.getItem(21), 21);
 
         //We should throw an exception when trying to access removed index;
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.getItem(22);
-        });
+        Assertions.assertThrows(Exception.class, () -> sut.getItem(22));
 
         //Current capacity is 32 and current count is 22;
         //after removing 22nd element count will be 21, which is NOT less than 21 (32 * 1.5)
@@ -111,9 +103,7 @@ class DynArrayTest {
         sut.remove(21);
         assertEquals(sut.capacity, 32);
         assertEquals(sut.count, 21);
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.getItem(21);
-        });
+        Assertions.assertThrows(Exception.class, () -> sut.getItem(21));
 
         //Current capacity is 32 and current count is 21;
         //after removing 21st element count will be 20, which is LESS than 21 (32 * 1.5)
@@ -121,9 +111,7 @@ class DynArrayTest {
         sut.remove(20);
         assertEquals(sut.capacity, 21);
         assertEquals(sut.count, 20);
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.getItem(20);
-        });
+        Assertions.assertThrows(Exception.class, () -> sut.getItem(20));
 
         //Current capacity is 21 and current count is 20;
         //removing elements at positions: 19, 18, 17, 16;
@@ -133,9 +121,7 @@ class DynArrayTest {
             sut.remove(i);
             assertEquals(sut.capacity, 21);
             final int _i = i;
-            Assertions.assertThrows(Exception.class, () -> {
-                sut.getItem(_i);
-            });
+            Assertions.assertThrows(Exception.class, () -> sut.getItem(_i));
         }
         assertEquals(sut.capacity, 21);
         assertEquals(sut.count, 16);
@@ -157,16 +143,12 @@ class DynArrayTest {
         assertEquals(sut.count, 0);
 
         //When incorrect index are passed to remove function, error should be thrown
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.remove(20);
-        });
-        Assertions.assertThrows(Exception.class, () -> {
-            sut.remove(-1);
-        });
+        Assertions.assertThrows(Exception.class, () -> sut.remove(20));
+        Assertions.assertThrows(Exception.class, () -> sut.remove(-1));
     }
 
     private DynArray<Integer> createSUT(int numberOfElements) {
-        DynArray<Integer> array = new DynArray<Integer>(Integer.class);
+        DynArray<Integer> array = new DynArray<>(Integer.class);
         for (int i = 0; i < numberOfElements; i++) {
             array.append(i);
         }
