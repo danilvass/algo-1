@@ -101,13 +101,4 @@ public class DynArray<T>
         }
     }
 
-    String p(T[] array) {
-        String s = "";
-        for (int i = 0; i < capacity; i++) {
-            s += array[i];
-            s += ", ";
-        }
-        return s;
-    }
-
 }
