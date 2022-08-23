@@ -25,8 +25,6 @@ class DynArrayTest {
     @org.junit.jupiter.api.Test
     void test_append() {
         DynArray<Integer> sut = createSUT(0);
-        assertEquals(sut.capacity, 16);
-        assertEquals(sut.count, 0);
 
         sut.append(1);
         assertEquals(sut.capacity, 16);
@@ -51,8 +49,6 @@ class DynArrayTest {
     @org.junit.jupiter.api.Test
     void test_insert() {
         DynArray<Integer> sut = createSUT(0);
-        assertEquals(sut.capacity, 16);
-        assertEquals(sut.count, 0);
 
         //Inserting into empty array at 0 index should act like 'append'
         sut.insert(99, 0);
