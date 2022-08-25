@@ -59,12 +59,12 @@ class StackTest {
 
     @Test
     void test_checkParentheses() {
-//        assertFalse(Stack.checkParentheses("(()"));
-//        assertTrue(Stack.checkParentheses("(())"));
-//        assertFalse(Stack.checkParentheses("()())"));
-//        assertTrue(Stack.checkParentheses("(()())"));
-//        assertTrue(Stack.checkParentheses("((((()))))"));
-//        assertFalse(Stack.checkParentheses("((((())))))"));
+        assertFalse(Stack.checkParentheses("(()"));
+        assertTrue(Stack.checkParentheses("(())"));
+        assertFalse(Stack.checkParentheses("()())"));
+        assertTrue(Stack.checkParentheses("(()())"));
+        assertTrue(Stack.checkParentheses("((((()))))"));
+        assertFalse(Stack.checkParentheses("((((())))))"));
     }
 
     @Test
