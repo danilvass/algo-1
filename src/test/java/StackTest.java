@@ -65,6 +65,8 @@ class StackTest {
         assertTrue(Stack.checkParentheses("(()())"));
         assertTrue(Stack.checkParentheses("((((()))))"));
         assertFalse(Stack.checkParentheses("((((())))))"));
+        assertFalse(Stack.checkParentheses("))(("));
+        assertFalse(Stack.checkParentheses(")(()()())("));
     }
 
     @Test

@@ -41,7 +41,7 @@ public class Stack<T>
 
         for (int i = 0; i < s.length(); i++) {
             Character currentChar = s.charAt(i);
-            if (stack.size() > 0 && currentChar != stack.peek()) {
+            if (stack.size() > 0 && currentChar == ')' && stack.peek() == '(') {
                 stack.pop();
             } else {
                 stack.push(currentChar);
