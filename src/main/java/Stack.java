@@ -18,7 +18,7 @@ public class Stack<T>
 
     public T pop()
     {
-        int size = this.size();
+        if (size() == 0) { return null; }
         T element = peek();
         list.remove(0);
         return element;
