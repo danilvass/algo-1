@@ -17,7 +17,7 @@ class DequeTest {
 
         assertEquals(1, sut.size());
         assertEquals(77, sut.removeFront());
-        assertEquals(null, sut.removeFront());
+        assertNull(sut.removeFront());
 
         assertEquals(0, sut.size());
     }
@@ -29,7 +29,7 @@ class DequeTest {
 
         assertEquals(1, sut.size());
         assertEquals(77, sut.removeTail());
-        assertEquals(null, sut.removeTail());
+        assertNull(sut.removeTail());
 
         assertEquals(0, sut.size());
     }
@@ -50,6 +50,8 @@ class DequeTest {
         assertEquals(88, sut.removeFront());
 
         assertEquals(1, sut.size());
+
+        assertEquals(77, sut.removeFront());
     }
 
     private Deque<Integer> createSUT() {
