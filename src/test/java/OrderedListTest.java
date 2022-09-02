@@ -89,6 +89,43 @@ class OrderedListTest {
     }
 
     @Test
+    void test_desc_delete() {
+        OrderedList<Integer> sut = new OrderedList<>(false);
+        sut.delete(0);
+        sut.delete(1);
+        sut.delete(2);
+
+        sut = createSUTInt(false);
+        assertEquals(9, sut.count());
+
+        sut.delete(9);
+        assertEquals(8, sut.count());
+        assertEquals(8, sut.head.value);
+        assertNull(sut.head.prev);
+
+        sut.delete(1);
+        assertEquals(7, sut.count());
+        assertEquals(2, sut.tail.value);
+        assertNull(sut.tail.next);
+
+        sut.delete(4);
+        assertEquals(6, sut.count());
+
+        sut.delete(2);
+        sut.delete(3);
+        sut.delete(4);
+        sut.delete(5);
+        sut.delete(6);
+        sut.delete(7);
+        sut.delete(8);
+
+        sut.delete(99);
+        sut.delete(88);
+
+        assertEquals(0, sut.count());
+    }
+
+    @Test
     void test_desc_list() {
         OrderedList<Integer> sut = createSUTInt(false);
         assertEquals(9, sut.head.value);
@@ -119,37 +156,6 @@ class OrderedListTest {
     }
 
     @Test
-    void test_desc_remove() {
-        OrderedList<Integer> sut = createSUTInt(false);
-
-        sut.delete(10);
-        sut.delete(0);
-        assertEquals(9, sut.count());
-
-        sut.delete(9);
-        assertEquals(8, sut.count());
-        assertEquals(8, sut.head.value);
-        assertNull(sut.head.prev);
-
-        sut.delete(1);
-        assertEquals(7, sut.count());
-        assertEquals(2, sut.tail.value);
-        assertNull(sut.tail.next);
-
-        sut.delete(4);
-        assertEquals(6, sut.count());
-
-        sut.delete(2);
-        sut.delete(3);
-        sut.delete(4);
-        sut.delete(5);
-        sut.delete(6);
-        sut.delete(7);
-        sut.delete(8);
-        assertEquals(0, sut.count());
-    }
-
-    @Test
     void test_desc_find() {
         OrderedList<Integer> sut = createSUTInt(false);
         assertNull(sut.find(0));
@@ -177,7 +183,9 @@ class OrderedListTest {
     void test_clear() {
         OrderedList<Integer> sut = createSUTInt(false);
         sut.clear(true);
-        sut.clear(false);
+        assertEquals(0, sut.count());
+        assertNull(sut.head);
+        assertNull(sut.tail);
     }
 
     private OrderedList<Integer> createSUTIntEmpty(boolean asc) {

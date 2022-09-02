@@ -39,6 +39,10 @@ public class OrderedList<T>
     {
         if (v1 instanceof Number) {
             return ((Integer)v1).compareTo(((Integer)v2));
+        } else if  (v1 instanceof String) {
+            String trimmed1 = ((String) v1).trim();
+            String trimmed2 = ((String) v2).trim();
+            return trimmed1.compareTo(trimmed2);
         }
         return 0;
     }
@@ -130,11 +134,7 @@ public class OrderedList<T>
     public void clear(boolean asc)
     {
         _ascending = asc;
-        ArrayList<Node<T>> list = getAll();
         clearAll();
-        for (Node<T> element: list) {
-            add(element.value);
-        }
     }
 
     public int count()
