@@ -15,15 +15,6 @@ class OrderedListTest {
     }
 
     @Test
-    void test_compare_strings() {
-        OrderedList<String> sut = createSUTStr(true);
-        assertEquals(0, sut.compare("1", "1"));
-        assertEquals(0, sut.compare("2", "2"));
-        assertEquals(1, sut.compare("1", "0"));
-        assertEquals(-1, sut.compare("0", "1"));
-    }
-
-    @Test
     void test_findNodeWithBinarySearch() {
         OrderedList<Integer> sut = createSUTInt(true);
         assertEquals(9, sut.count());
@@ -40,12 +31,15 @@ class OrderedListTest {
         assertEquals(88, sut.tail.prev.value);
 
         assertEquals(14, sut.count());
-        System.out.println(sut.str());
     }
 
     @Test
     void test_find() {
-        OrderedList<Integer> sut = createSUTInt(true);
+        OrderedList<Integer> sut = new OrderedList<Integer>(true);
+        sut.add(1);
+        assertEquals(1, sut.find(1).value);
+
+        sut = createSUTInt(true);
         assertNull(sut.find(0));
 
         assertEquals(1, sut.find(1).value);
@@ -93,7 +87,7 @@ class OrderedListTest {
     void test_desc_list() {
         OrderedList<Integer> sut = createSUTInt(false);
         assertEquals(9, sut.head.value);
-        assertEquals(0, sut.tail.value);
+        assertEquals(1, sut.tail.value);
     }
 
     @Test
@@ -139,6 +133,15 @@ class OrderedListTest {
 
         sut.delete(4);
         assertEquals(6, sut.count());
+
+        sut.delete(2);
+        sut.delete(3);
+        sut.delete(4);
+        sut.delete(5);
+        sut.delete(6);
+        sut.delete(7);
+        sut.delete(8);
+        assertEquals(0, sut.count());
     }
 
     @Test
@@ -168,11 +171,8 @@ class OrderedListTest {
     @Test
     void test_clear() {
         OrderedList<Integer> sut = createSUTInt(false);
-        System.out.println(sut.str());
         sut.clear(true);
-        System.out.println(sut.str());
         sut.clear(false);
-        System.out.println(sut.str());
     }
 
     private OrderedList<Integer> createSUTIntEmpty(boolean asc) {
@@ -192,7 +192,6 @@ class OrderedListTest {
         sut.add(8);
         sut.add(9);
 
-        System.out.println("created sut: " + sut.str());
         return sut;
     }
 

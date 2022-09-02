@@ -87,7 +87,10 @@ public class OrderedList<T>
     public Node<T> find(T val)
     {
         Node<T> currentNode = findClosestNode(val);
-        if (currentNode.value == val) {
+        if (currentNode == null) {
+            return null;
+        }
+        if (compare(currentNode.value, val) == EQUAL_COMPARE) {
             return currentNode;
         } else if (currentNode.next != null && compare(currentNode.next.value, val) == EQUAL_COMPARE) {
             return currentNode.next;
@@ -101,6 +104,8 @@ public class OrderedList<T>
     {
         Node<T> node = find(val);
         if (node == null) { return; }
+        if (compare(node.value, val) != EQUAL_COMPARE) { return; }
+
         Node<T> next = node.next;
         Node<T> prev = node.prev;
         if (next != null && prev != null) {
@@ -116,7 +121,10 @@ public class OrderedList<T>
         if (prev != null) {
             prev.next = null;
             this.tail = prev;
+            return;
         }
+        this.head = null;
+        this.tail = null;
     }
 
     public void clear(boolean asc)
@@ -152,6 +160,7 @@ public class OrderedList<T>
     }
 
     //MARK: - processing helpers
+
     private void clearAll() {
         while(this.head != null) {
             this.head = this.head.next;
@@ -174,11 +183,11 @@ public class OrderedList<T>
     }
 
     private Node<T> findClosestNode(T value) {
-        if (compare(head.value, value) == nextCompareResult()) {
+        if (compare(head.value, value) == EQUAL_COMPARE || compare(head.value, value) == nextCompareResult()) {
             return this.head;
         }
 
-        if (this.tail != null && compare(tail.value, value) == prevCompareResult()) {
+        if (this.tail != null && (compare(tail.value, value) == prevCompareResult() || compare(tail.value, value) == EQUAL_COMPARE)) {
             return this.tail;
         }
 
