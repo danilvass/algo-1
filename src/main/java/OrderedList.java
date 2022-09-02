@@ -183,6 +183,8 @@ public class OrderedList<T>
     }
 
     private Node<T> findClosestNode(T value) {
+        if (head == null) { return null; }
+
         if (compare(head.value, value) == EQUAL_COMPARE || compare(head.value, value) == nextCompareResult()) {
             return this.head;
         }

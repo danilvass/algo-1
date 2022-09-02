@@ -63,7 +63,12 @@ class OrderedListTest {
 
     @Test
     void test_delete() {
-        OrderedList<Integer> sut = createSUTInt(true);
+        OrderedList<Integer> sut = new OrderedList<>(true);
+        sut.delete(0);
+        sut.delete(1);
+        sut.delete(2);
+
+        sut = createSUTInt(true);
         assertEquals(9, sut.count());
         sut.delete(10);
         sut.delete(0);
