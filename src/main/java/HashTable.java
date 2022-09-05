@@ -50,7 +50,7 @@ public class HashTable
         int hashFunValue = hashFun(value);
         for (int i = 0; i < size; i++) {
             int maybeIndex = (hashFunValue + i) % size;
-            if (slots[maybeIndex].equals(value)) {
+            if (slots[maybeIndex] != null && slots[maybeIndex].equals(value)) {
                 return maybeIndex;
             }
         }
