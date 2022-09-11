@@ -18,8 +18,6 @@ class NativeDictionary<T>
     public int size;
     public Entry [] slots;
 
-    private int count = 0;
-
     public NativeDictionary(int sz, Class clazz)
     {
         size = sz;
