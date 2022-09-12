@@ -3,10 +3,10 @@ import java.lang.reflect.Array;
 class NativeDictionary<T>
 {
 
-    class Entry<T> {
+    static class Entry<T> {
         String key;
         T value;
-        Entry next;
+        Entry<T> next;
 
         public Entry(String key, T value, Entry next) {
             this.key = key;
@@ -16,7 +16,7 @@ class NativeDictionary<T>
     }
 
     public int size;
-    public Entry [] slots;
+    public Entry<T> [] slots;
 
     public NativeDictionary(int sz, Class clazz)
     {
@@ -26,7 +26,8 @@ class NativeDictionary<T>
 
     public int hashFun(String key)
     {
-        return (key.hashCode()) % size;
+        int hash = (key.hashCode()) % size;
+        return Math.abs(hash);
     }
 
     public boolean isKey(String key)
@@ -57,8 +58,7 @@ class NativeDictionary<T>
         entry.next = new Entry(key, value, null);
     }
 
-    public T get(String key)
-    {
+    public T get(String key) {
         int index = hashFun(key);
         Entry<T> entry = slots[index];
         while (entry != null) {
