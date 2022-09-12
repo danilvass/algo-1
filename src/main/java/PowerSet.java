@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PowerSet
@@ -156,8 +155,6 @@ public class PowerSet
         for (String value: set2.values()) {
             if (diff.get(value)) {
                 diff.remove(value);
-            } else {
-                diff.put(value);
             }
         }
         return diff;

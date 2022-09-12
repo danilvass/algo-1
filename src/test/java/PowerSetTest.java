@@ -104,21 +104,25 @@ class PowerSetTest {
         PowerSet secondSut = createSUT();
         assertEquals(0, sut.difference(secondSut).size());
 
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 5; i++) {
             sut.put(String.valueOf(i));
         }
-        assertEquals(10000, sut.difference(secondSut).size());
+        assertEquals(5, sut.difference(secondSut).size());
+        assertEquals(0, sut.difference(sut).size());
+        assertEquals(0, secondSut.difference(sut).size());
 
-        for (int i = 10000; i < 20000; i++) {
+        for (int i = 3; i < 5; i++) {
             secondSut.put(String.valueOf(i));
         }
 
         PowerSet diff = sut.difference(secondSut);
+        assertEquals(3, diff.size());
 
-        assertEquals(20000, diff.size());
-
-        for (int i = 0; i < 20000; i++) {
+        for (int i = 0; i < 3; i++) {
             assertTrue(diff.get(String.valueOf(i)));
+        }
+        for (int i = 3; i < 10; i++) {
+            assertFalse(diff.get(String.valueOf(i)));
         }
     }
 
