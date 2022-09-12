@@ -7,7 +7,11 @@ class NativeDictionaryTest {
     @Test
     void test_init() {
         NativeDictionary<String> sut = createSUT();
+
+        sut.get("1");
         sut.put("1", "Test 1");
+        sut.isKey("aksfksdhfkajsdhf kjahsdkjf hksajdh kcj xhkjadhf0");
+        sut.get("2");
         sut.put("2", "Test 2");
         sut.put("3", "Test 3");
         sut.put("4", "Test 4");
@@ -16,7 +20,10 @@ class NativeDictionaryTest {
         sut.put("7", "Test 7");
         sut.put("8", "Test 8");
         sut.put("9", "Test 9");
+        sut.get("10");
         sut.put("10", "Test 10");
+        sut.isKey("29");
+        sut.put("29", "Test 10");
 
         assertEquals("Test 1", sut.get("1"));
         assertEquals("Test 2", sut.get("2"));
@@ -28,6 +35,7 @@ class NativeDictionaryTest {
         assertEquals("Test 8", sut.get("8"));
         assertEquals("Test 9", sut.get("9"));
         assertEquals("Test 10", sut.get("10"));
+
     }
 
     private NativeDictionary<String> createSUT() {
