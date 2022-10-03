@@ -1,0 +1,12 @@
+1) trimmed1 - v1WithTrimmedCharacters //текст без лишних trimming characters
+2) trimmed2 - v2WithTrimmedCharacters //текст без лишних trimming characters
+3) newNode - nodeToInsert //нода, которую хотим вставить в список
+4) currentNode - closestToInsertedNode //ближайшая нода, рядом с которой будет происходить вставка
+5) prev - prevNodeFromClosest //предыдущая нода перед найденной ближайшей
+6) node - nodeToDelete //нода, которую мы хотим удалить
+7) _count - halfListSize //половина от размера списка
+8) _notNullMid - closestNode //ближайшая нода к данному значению
+9) element - firstElement //первый элемент в queue
+10) newCapacity - increasedCapacity // увеличенный объем динамического массива
+11) position - entryInfo //данные по записи в кэше
+12) entry - entryList //список записей в ячейке кэша

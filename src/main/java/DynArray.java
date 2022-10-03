@@ -36,7 +36,7 @@ public class DynArray<T>
     }
 
     public T getItem(int index) {
-        assertIndexInBounds(index, false);
+        assertIndexInBounds(index, true);
         return array[index];
     }
 
@@ -47,7 +47,7 @@ public class DynArray<T>
     }
 
     public void insert(T itm, int index) {
-        assertIndexInBounds(index, true);
+        assertIndexInBounds(index, false);
         extendBufferSizeIfNeeded();
         T[] newArray = (T[]) Array.newInstance(this.clazz, capacity);
         System.arraycopy(array, 0, newArray, 0, index);
@@ -58,7 +58,7 @@ public class DynArray<T>
     }
 
     public void remove(int index) {
-        assertIndexInBounds(index, false);
+        assertIndexInBounds(index, true);
         shrinkBufferSizeIfNeeded();
         T[] newArray = (T[]) Array.newInstance(this.clazz, capacity);
         System.arraycopy(array, 0, newArray, 0, index);
@@ -75,9 +75,9 @@ public class DynArray<T>
         if (canAddIntoBuffer()) {
             return;
         }
-        int newCapacity = (int) (capacity * INCREASE_BUFFER_RATIO);
-        makeArray(newCapacity);
-        capacity = newCapacity;
+        int increasedCapacity = (int) (capacity * INCREASE_BUFFER_RATIO);
+        makeArray(increasedCapacity);
+        capacity = increasedCapacity;
     }
 
     private void shrinkBufferSizeIfNeeded() {
@@ -91,14 +91,14 @@ public class DynArray<T>
         makeArray(decreasedCapacity);
     }
 
-    private void assertIndexInBounds(int index, boolean containsCount) {
+    private void assertIndexInBounds(int index, boolean shouldCheckEndBoundIndex) {
         if (index < 0) {
             Exception ex = new Exception("Cannot use negative index");
             throw new RuntimeException(ex);
-        } else if (containsCount && index > count) {
+        } else if (!shouldCheckEndBoundIndex && index > count) {
             Exception ex = new Exception("DynArray index: " + index + " out of bounds: " + count);
             throw new RuntimeException(ex);
-        } else if (!containsCount && index >= count) {
+        } else if (shouldCheckEndBoundIndex && index >= count) {
             Exception ex = new Exception("DynArray index: " + index + " out of bounds: " + count);
             throw new RuntimeException(ex);
         }

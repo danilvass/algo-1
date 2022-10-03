@@ -78,13 +78,13 @@ public class NativeCache<T> {
 
     //Returns cache entry without incrementing hits
     public Entry<T> inspectEntry(String key) {
-        EntryPosition position = positionFor(key);
+        EntryPosition entryInfo = positionFor(key);
 
-        if (!position.exists) {
+        if (!entryInfo.exists) {
             return null;
         }
 
-        return entries[position.index].values.get(position.offset);
+        return entries[entryInfo.index].values.get(entryInfo.offset);
     }
 
     //Returns cache entry and increments hits
@@ -117,11 +117,11 @@ public class NativeCache<T> {
             count--;
         }
 
-        EntryPosition position = positionFor(key);
+        EntryPosition entryInfo = positionFor(key);
 
-        EntryList<T> entryList = entries[position.index];
-        if (position.exists) {
-            entryList.update(position.offset, key, value, entryList.values.get(position.offset).hits);
+        EntryList<T> entryList = entries[entryInfo.index];
+        if (entryInfo.exists) {
+            entryList.update(entryInfo.offset, key, value, entryList.values.get(entryInfo.offset).hits);
         } else {
             count++;
             entryList.add(key, value);
@@ -129,16 +129,16 @@ public class NativeCache<T> {
     }
 
     public boolean remove(String value) {
-        EntryPosition position = positionFor(value);
+        EntryPosition entryInfo = positionFor(value);
 
-        if (!position.exists) {
+        if (!entryInfo.exists) {
             return false;
         }
 
         count--;
 
-        EntryList<T> entryList = entries[position.index];
-        entryList.remove(position.offset);
+        EntryList<T> entryList = entries[entryInfo.index];
+        entryList.remove(entryInfo.offset);
 
         return true;
     }
@@ -160,12 +160,12 @@ public class NativeCache<T> {
 
     private EntryPosition positionFor(String key) {
         int index = index(key);
-        EntryList<T> entry = entries[index];
+        EntryList<T> entryList = entries[index];
 
         int offset = 0;
-        for (; offset < entry.values.size(); offset++) {
+        for (; offset < entryList.values.size(); offset++) {
 
-            if (entry.values.get(offset).key.equals(key)) {
+            if (entryList.values.get(offset).key.equals(key)) {
                 return new EntryPosition(true, index, offset);
             }
         }

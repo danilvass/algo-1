@@ -18,7 +18,9 @@ public class OrderedList<T>
     public Node<T> head, tail;
     private boolean _ascending;
 
-    private final int EQUAL_COMPARE = 0;
+    private final int EQUAL_COMPARE_RESULT = 0;
+    private final int GREATER_COMPARE_RESULT = 1;
+    private final int LESS_COMPARE_RESULT = -1;
 
     public OrderedList(boolean asc)
     {
@@ -28,11 +30,11 @@ public class OrderedList<T>
     }
 
     private int nextCompareResult() {
-        return _ascending ? 1 : -1;
+        return _ascending ? GREATER_COMPARE_RESULT : LESS_COMPARE_RESULT;
     }
 
     private int prevCompareResult() {
-        return _ascending ? -1 : 1;
+        return _ascending ? LESS_COMPARE_RESULT : GREATER_COMPARE_RESULT;
     }
 
     public int compare(T v1, T v2)
@@ -40,9 +42,9 @@ public class OrderedList<T>
         if (v1 instanceof Number) {
             return ((Integer)v1).compareTo(((Integer)v2));
         } else if  (v1 instanceof String) {
-            String trimmed1 = ((String) v1).trim();
-            String trimmed2 = ((String) v2).trim();
-            return trimmed1.compareTo(trimmed2);
+            String v1WithTrimmedCharacters = ((String) v1).trim();
+            String v2WithTrimmedCharacters = ((String) v2).trim();
+            return v1WithTrimmedCharacters.compareTo(v2WithTrimmedCharacters);
         }
         return 0;
     }
@@ -55,63 +57,63 @@ public class OrderedList<T>
             return;
         }
 
-        Node<T> newNode = new Node<>(value);
-        Node<T> currentNode = findClosestNode(value);
+        Node<T> nodeToInsert = new Node<>(value);
+        Node<T> closestToInsertedNode = findClosestNode(value);
 
-        int compareResult = compare(currentNode.value, value);
+        int compareResult = compare(closestToInsertedNode.value, value);
 
-        if (compareResult == EQUAL_COMPARE || compareResult == nextCompareResult()) {
+        if (compareResult == EQUAL_COMPARE_RESULT || compareResult == nextCompareResult()) {
             //Inserting new value before founded node
-            if (currentNode == this.head) {
+            if (closestToInsertedNode == this.head) {
                 insertToHead(value);
                 return;
             }
 
-            Node<T> prev = currentNode.prev;
-            newNode.prev = prev;
-            currentNode.prev = newNode;
-            newNode.next = currentNode;
-            if (prev != null) { prev.next = newNode; }
+            Node<T> prevNodeFromClosest = closestToInsertedNode.prev;
+            nodeToInsert.prev = prevNodeFromClosest;
+            closestToInsertedNode.prev = nodeToInsert;
+            nodeToInsert.next = closestToInsertedNode;
+            if (prevNodeFromClosest != null) { prevNodeFromClosest.next = nodeToInsert; }
         } else {
             //Inserting new value after founded node
 
-            if (currentNode == this.tail) {
+            if (closestToInsertedNode == this.tail) {
                 insertToTail(value);
                 return;
             }
 
-            Node<T> next = currentNode.next;
-            newNode.next = next;
-            currentNode.next = newNode;
-            newNode.prev = currentNode;
-            if (next != null) { next.prev = newNode; }
+            Node<T> nextNodeToClosest = closestToInsertedNode.next;
+            nodeToInsert.next = nextNodeToClosest;
+            closestToInsertedNode.next = nodeToInsert;
+            nodeToInsert.prev = closestToInsertedNode;
+            if (nextNodeToClosest != null) { nextNodeToClosest.prev = nodeToInsert; }
         }
     }
 
     public Node<T> find(T val)
     {
-        Node<T> currentNode = findClosestNode(val);
-        if (currentNode == null) {
+        Node<T> closestNode = findClosestNode(val);
+        if (closestNode == null) {
             return null;
         }
-        if (compare(currentNode.value, val) == EQUAL_COMPARE) {
-            return currentNode;
-        } else if (currentNode.next != null && compare(currentNode.next.value, val) == EQUAL_COMPARE) {
-            return currentNode.next;
-        } else if (currentNode.prev != null && compare(currentNode.prev.value, val) == EQUAL_COMPARE) {
-            return currentNode.prev;
+        if (compare(closestNode.value, val) == EQUAL_COMPARE_RESULT) {
+            return closestNode;
+        } else if (closestNode.next != null && compare(closestNode.next.value, val) == EQUAL_COMPARE_RESULT) {
+            return closestNode.next;
+        } else if (closestNode.prev != null && compare(closestNode.prev.value, val) == EQUAL_COMPARE_RESULT) {
+            return closestNode.prev;
         }
         return null;
     }
 
     public void delete(T val)
     {
-        Node<T> node = find(val);
-        if (node == null) { return; }
-        if (compare(node.value, val) != EQUAL_COMPARE) { return; }
+        Node<T> nodeToDelete = find(val);
+        if (nodeToDelete == null) { return; }
+        if (compare(nodeToDelete.value, val) != EQUAL_COMPARE_RESULT) { return; }
 
-        Node<T> next = node.next;
-        Node<T> prev = node.prev;
+        Node<T> next = nodeToDelete.next;
+        Node<T> prev = nodeToDelete.prev;
         if (next != null && prev != null) {
             next.prev = prev;
             prev.next = next;
@@ -185,34 +187,34 @@ public class OrderedList<T>
     private Node<T> findClosestNode(T value) {
         if (head == null) { return null; }
 
-        if (compare(head.value, value) == EQUAL_COMPARE || compare(head.value, value) == nextCompareResult()) {
+        if (compare(head.value, value) == EQUAL_COMPARE_RESULT || compare(head.value, value) == nextCompareResult()) {
             return this.head;
         }
 
-        if (this.tail != null && (compare(tail.value, value) == prevCompareResult() || compare(tail.value, value) == EQUAL_COMPARE)) {
+        if (this.tail != null && (compare(tail.value, value) == prevCompareResult() || compare(tail.value, value) == EQUAL_COMPARE_RESULT)) {
             return this.tail;
         }
 
-        int _count = this.count();
-        _count = (int) Math.ceil((double)_count / 2.0);
+        int halfListSize = this.count();
+        halfListSize = (int) Math.ceil((double)halfListSize / 2.0);
 
-        Node<T> mid = findMiddle(this.head, true, _count);
-        Node<T> _notNullMid = mid;
+        Node<T> mid = findMiddle(this.head, true, halfListSize);
+        Node<T> closestNode = mid;
 
-        while(mid != null && _count > 1) {
-            _count = (int) Math.ceil((double)_count / 2.0);
+        while(mid != null && halfListSize > 1) {
+            halfListSize = (int) Math.ceil((double)halfListSize / 2.0);
 
-            if (compare(mid.value, value) == EQUAL_COMPARE) {
+            if (compare(mid.value, value) == EQUAL_COMPARE_RESULT) {
                 return mid;
             } else if (compare(mid.value, value) == nextCompareResult()) {
-                mid = findMiddle(mid, false, _count);
+                mid = findMiddle(mid, false, halfListSize);
             } else {
-                mid = findMiddle(mid, true, _count);
+                mid = findMiddle(mid, true, halfListSize);
             }
-            if (mid != null) { _notNullMid = mid; }
+            if (mid != null) { closestNode = mid; }
         }
 
-        return _notNullMid;
+        return closestNode;
     }
 
     private void insertToHead(T value) {

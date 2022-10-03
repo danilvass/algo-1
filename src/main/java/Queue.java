@@ -18,9 +18,9 @@ public class Queue<T>
     public T dequeue()
     {
         if (list.size() == 0) { return null; }
-        T element = list.get(0);
+        T firstElement = list.get(0);
         list.remove(0);
-        return element;
+        return firstElement;
     }
 
     public int size()
