@@ -1,0 +1,17 @@
+7.1
+1) notConvertable - convertable
+2) isCommentShouldHave - canSendComment
+3) addHash - shouldAddHash
+4) fullWidth - shouldUseFullWidth
+5) isRemove - shouldRemoveMessage
+
+7.2
+1) checkScanStatus - isScanEnabled
+2) deleted - hasError
+3) show - isOk
+
+7.3
+1) for(int i = 0; i < maxRating; i++) - for(int rating = 0; rating < maxRating; rating++)
+
+7.5
+1) temp - groupedMessages
