@@ -1,0 +1,24 @@
+6.1
+1) totalAmount - totalTicketsCount //количество выбранных билетов
+2) calculateAccountsViewData - getAccountsViewData //получить данные для отображения
+3) presentRateController - onRateDidPress //событие нажатия кнопки (как обработать нажатие, дело вызывающего клиента)
+4) presentMessageActionPage - onLongTap //событие нажатия кнопки (как обработать нажатие, дело вызывающего клиента)
+5) presentActivityController - onShareDidPress //событие нажатия кнопки (как обработать нажатие, дело вызывающего клиента)
+
+6.2
+1) pagesFactory //фабрика создания экранов
+2) codeScannerDelegate //делегат сканнера штрихкодов
+3) NavigationContextDecorator //декоратор компонента навигации
+4) appListenerCompose //композиция слушателей жизненного цикла приложения
+
+6.3
+1) channelGroupTitle //заголовок группы чата, используемый в другом экране
+2) changeRegionUpdateEvent //события смены региона, используемое на экране платежей
+3) accountAmount //количество средств в аккаунте, используемое на экране банка
+
+6.4
+1) routeOnOfferLaunchFinish - finishOfferFlow 
+2) logGetScenarioUnvailableEvent - logFailedResponse 
+3) requestWhenInUseAuthorization - requestGeoPermission
+4) sharedPersonalDataDidPresent - sharedDataPresented
+5) showSharedDataInfoDidPress - sharedDataDidPress
