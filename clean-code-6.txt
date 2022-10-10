@@ -1,0 +1,15 @@
+3.1
+ScreenRecordingManager - ScreenRecordingObserver //Компонент, отвечающий за обработку событий при записи экрана (безопасность)
+UserManager - UserDataStorage //Хранилище сессионнах данных пользователя 
+NetworkRequestsManager - NetworkRequestListener //Слушатель веб-сокет соединения
+ConfigurationController - AppConfigurationStorage //Конфигурация приложения
+PhotoDataProcessor - UserAvatarCropper //Компонент, отвечающий за обрезание пользовательских аватарок 
+
+3.2
+get/read/retrieve -> read() //Методы, используемые в разного рода кэшах
+Router/Navigator/NavigationManager -> Router //Классы, отвечающие за навигацию между экранами в каком-либо модуле
+_Validator/_Checker/_Processor -> _Validator //Классы, отвечающие за валидацию каких-либо параметров (например, TransferAmountValidator)
+Storage/Database/DataContainer -> Storage //Хранилища данных
+updateUI/setupUI/setupViews -> updateUI //Методы, настраивающие контент на экране
+NetworkManager/NetworkModule/HttpClient -> HttpClient //Клиент для REST запросов 
+calculateDiff/updateDiff/createDiff -> calculateDiff //Методы, высчитывающие какую-либо разницу для оптимального обновления данных на экране
