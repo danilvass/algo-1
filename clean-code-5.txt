@@ -1,0 +1,13 @@
+8
+defaultTimeout - defaultTimeoutSeconds //Таймаут для rest запросов
+springResponseTime - springResponseTimeSeconds //Время анимации
+remainingTime - remainingTimeSeconds //Оставшееся время для отправки запроса
+amount - kztAmount //Введенное пользователем значение суммы в тенге
+launchList - launchListView  //Элемент, отвечающий за отображение списка данных
+page - currentPageIndex //Текущий индекс показанной страницы
+hasMore - shouldSendRequest //Признак, определяющий нужно ли отправлять дальнейшие запросы на сервер
+data - inputAmount //Введенное пользователем число
+currentValue - selectedAccount //Выбранный счет клиента
+userObject - user //Объект пользователя
+pendingData - pendingRequests //Список запросов, которые ждут обработки
+res - serverResponse //Ответ (результат) от сервера
