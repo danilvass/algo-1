@@ -1,0 +1,11 @@
+1) getCurrentAccount - getCurrentAccount/updateLastSeenDate //У метода был побочный сайд эффект, в виде обновления переменной lastSeenDate, поэтому метод разделился на два разных
+2) mapToData - convertToViewData //метод, конвертирующий API модель в модель представления
+3) sendEvent - sendClickedEvent //метод, отправляющий аналитику по клику
+4) addBadges - withBadges //метод, возвращающий новый элемент картинки со значками
+5) bottomSheetStart - presentBottomSheetScreen //метод, показывающий bottom sheet 
+6) sendPhoto - uploadPhotoToServer //метод, загружающий фото на сервер
+7) processResult - processCropError //метод, обрабатывающий ошибки обрезки фотографии
+8) getAgreement - sendAgreementRequest //метод, отправляющий на сервер запрос о пользовательском соглашении
+9) validate - isAccountValid //метод, валидирующий счет
+10) badges - getBadges //метод, возвращающий значки
+11) updatePayment - withUpdatedAmount //метод, возвращающий платеж с новой суммой
