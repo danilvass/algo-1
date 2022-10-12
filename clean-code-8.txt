@@ -1,0 +1,8 @@
+1) Request(cachedDate, currentDate -> Request(from: cachedDate, to: currentDate)
+2) SyncMessageHttpRequest("12", 1939921.0, messages) -> SyncMessageHttpRequest(groupId: "12", updatedDate: 1939921.0, messages: messages)
+3) ClosedSessionData(.expired) -> ClosedSessionData(reason: .expired)
+
+4) Интерфейс ImagePickerFlow, реализации SingleImagePickerFlow/MultipleImagePickerFlow
+Интерфейс FaceCheckFlow, реализация FaceCheckNavigationFlow
+Интерфейс AnalyticsEventLogger, реализации FirebaseAnalyticsLogger, AmplitudeAnalyticsLogger, AnalyticsLoggerCompose (Firebase, Amplitude - аналитические сервисы)
+Интерфейс HttpClient, реализация AlamofireHttpClient (Alamofire - сторонняя библиотека)
