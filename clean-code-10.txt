@@ -1,0 +1,41 @@
+1) if (code == "BUSINESS") {...} -> if (code == ErrorCodes.business) { ... } // Вынес типы серверных ошибок в отдельный enum
+
+2) queryParam = "dynamicLink" ->
+
+enum Constants {
+	case dynamikLink = "dynamikLink"
+}
+
+queryParam = Constants.dynamikLink // Вынес константное значение в свой enum для большей читаемости
+
+3) return validVectorsCount > 1 && sourceAccountType == .enabled && targetAccountType != .disabled -> 
+
+let hasValidVectors =  validVectorsCount > 1
+let accountsAreValid = sourceAccountType == .enabled && targetAccountType != .disabled
+return hasValidVectors && accountsAreValid // Разделил большой return на два отдельных boolean
+
+4) height = width / count //Добавил валидацию параметра count, так как он приходит с сервера, и потенциально возможно деление на 0
+
+5) totalValue = amount * rate //Добавил валидацию параметра rate, так как оно приходит с сервера, и потенциально переполнение Int
+
+6) imageLoader["Disk Directory"] as! String //Убрал опасный кастинг с json, добавил проверку типа на этапе парсинга API
+
+7) (code as! Int) //Убрал опасный кастинг с json, добавил проверку типа на этапе парсинга API
+
+8) if (dest == "INTERNATIONAL" || dest == "OWN_ACCOUNTS") -> if (availableDestinations.countains(dest)) //Переделал проверку валидности аккаунта, вынес типы в отдельный массив
+
+9) return (finishDate > Date() && startDate < Date()) || (type == "PROMO") ->
+let isDateValid = finishDate > Date() && startDate < Date()
+let isTypeValid = type == OfferType.Promo
+return isDateValid || isTypeValid //Разделил длинный логический return на более понятные сравнения boolean 
+
+10) remainingTime = total / expired //Добавил валидацию параметра expired, так как потенциально деление на 0
+
+11) return status == "SUCCESS" -> return status == ValidationStatus.success // Вынес константное значение в отдельный enum для большей читаемости
+
+12) if (parameterId == selectedParameterId && inputAmount > 0 && accountInfo.isBonusEnabled) -> 
+let validParameter = parameterId == selectedParameterId
+let validAmount = inputAmount > 0
+let bonusEnabled = accountInfo.isBonusEnabled
+if (validParameter && validAmount && bonusEnabled) 
+// Разделил сложное условие на 3 отдельных boolean
