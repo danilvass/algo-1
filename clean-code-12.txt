@@ -1,0 +1,108 @@
+1) 
+Было: CalendarUtils.refreshDelay //публичная мутабельная переменная
+Стало: class PromoRefreshService
+private constant refreshDelay //приватная константа, которую можно передать в конструкторе
+
+2) 
+Было: func clearAll() //публичный метод очистки кэша
+Стало: private func clearAll() //теперь приватный метод, вызывается только внутри класса
+
+3) 
+Было: UserPreferences.hasUnprocessedPayment //публичная глобальная мутабельная настройка для раздела платежей
+
+Стало: class PaymentsViewModel
+private var hasUnprocessedPayment //приватная настройка, хранящаяся только во время жизни раздела
+
+4) 
+Было: UserPreferences.messengerGroupsLoaded //публичная глобальная мутабельная настройка для раздела сообщений
+
+Стало: class MessengerService
+var isGroupsLoaded //приватная мутабельная настройка для раздела сообщений, хранящаяся только во время жизни раздела
+
+5) Было:
+transferUnit.transferManager //глобальный доступ к классу transferManager
+
+Стало:
+class TransferViewModel
+constant transferManager //теперь доступ только во время жизни раздела, доступ есть только у раздела
+
+6) class ProfilePhotoManager
+var profilePhotoExpire: Date //публичная мутабельная переменная для фотографии пользователя
+
+Стало:
+class ProfilePhotoManager
+private var profilePhotoExpire: Date //теперь приватная, меняется только внутри класса
+
+7) Было:
+class PaymentPreferences
+var selectedRegion //публичная мутабельная переменная для региона платежа
+
+Стало:
+class PaymentPreferences
+private var selectedRegion //теперь приватная, меняется только внутри класса
+
+8) Было:
+appUnit.isPushNotificationsEnabled //публичная глобальная мутабельная переменная для определения статуса пуш уведомлений
+
+Стало:
+class PushNotificationsHandler
+func isPushNotificationsEnabled() -> Bool //метод внутри класса, хранящийся приватно внутри раздела уведомлений
+
+9) Было:
+class QrReceiptPresenter
+var showSenderName: Bool //настройка для отображения квитанции, хранящаяся как переменная внутри класса
+
+Стало:
+class QrReceiptPresenter
+func presentReceipt(showSenderName: Bool) //теперь не храним переменную, передаем внутри метода, там же и обрабатываем
+
+10) Было:
+class AppSettingsProvider
+var forceRefresh: Bool //мутабельная настройка для обновления данных с сервера
+
+Стало:
+class AppSettingsProvider
+func refresh(force: Bool) //передаем признак как аргумент в метод, там же и обрабатываем
+
+11) Было:
+class DeviceBackup
+func clearUserData() //публичный метод для очистки данных приложения
+
+Стало:
+class DeviceBackup
+private func clearUserData() //приватный метод, вызывается по внутренней логике класса 
+
+12) Было:
+
+var accounts = [Account]()
+var sourceAccounts = [Account]()
+var targetAccounts = [Account]()
+///...
+
+accounts = sourceAccount + targetAccounts //парсинг общих счетов из ответа сервера
+
+Стало:
+let accounts = getSourceAccounts(response) + getTargetAccounts(response) //теперь отдельные методы для парсинга разных типов счетов
+
+13) Было:
+var smsTimerInSecs //публичная переменная для переотправки смс
+
+Стало:
+
+private let smsTimerInSecs //приватная константа, приходящая в конструктор класса
+
+14) Было:
+transferManager.transferCurrency //публичная мутабельная переменная валюты
+
+Стало:
+class TransferCurrencyProvider
+func getCurrency() //отдельный метод для получения валюты
+
+15) Было:
+class UserDataStorage
+var userId //публичная мутабельная переменная 
+
+Стало:
+class UserDataStorage
+func getUserId //отдельный метод для получения данных
+
