@@ -1,0 +1,101 @@
+3.1 Добавленные комментарии:
+
+//Вычисляем координаты, пропорциональные нашей картинке 
+var normalizedPoint = CGPoint(x: Double(landmark.position.y) / input.height, y: Double(landmark.position.x) / input.width)
+
+
+disposable = Disposable { [weak self] in
+    guard let self = self else { return }
+    //Освобождаем память, после удаления disposal owner'a  
+    self.lock.write { self.listeners[id] = nil }
+}
+
+Комментарии для работы с защищенным хранилищем паролей:
+
+/**
+     Item data can only be accessed
+     while the device is unlocked. This is recommended for items that only
+     need be accesible while the application is in the foreground. Items
+     with this attribute will migrate to a new device when using encrypted
+     backups.
+     */
+case whenUnlocked
+    
+    /**
+     Item data can only be
+     accessed once the device has been unlocked after a restart. This is
+     recommended for items that need to be accesible by background
+     applications. Items with this attribute will migrate to a new device
+     when using encrypted backups.
+     */
+case afterFirstUnlock
+    
+    /**
+     Item data can always be accessed
+     regardless of the lock state of the device. This is not recommended
+     for anything except system use. Items with this attribute will migrate
+     to a new device when using encrypted backups.
+     */
+case always
+    
+    /**
+     Item data can
+     only be accessed while the device is unlocked. This class is only
+     available if a passcode is set on the device. This is recommended for
+     items that only need to be accessible while the application is in the
+     foreground. Items with this attribute will never migrate to a new
+     device, so after a backup is restored to a new device, these items
+     will be missing. No items can be stored in this class on devices
+     without a passcode. Disabling the device passcode will cause all
+     items in this class to be deleted.
+     */
+case whenPasscodeSetThisDeviceOnly
+    
+    /**
+     Item data can only
+     be accessed while the device is unlocked. This is recommended for items
+     that only need be accesible while the application is in the foreground.
+     Items with this attribute will never migrate to a new device, so after
+     a backup is restored to a new device, these items will be missing.
+     */
+case whenUnlockedThisDeviceOnly
+    
+    /**
+     Item data can
+     only be accessed once the device has been unlocked after a restart.
+     This is recommended for items that need to be accessible by background
+     applications. Items with this attribute will never migrate to a new
+     device, so after a backup is restored to a new device these items will
+     be missing.
+     */
+case afterFirstUnlockThisDeviceOnly
+    
+    /**
+     Item data can always
+     be accessed regardless of the lock state of the device. This option
+     is not recommended for anything except system use. Items with this
+     attribute will never migrate to a new device, so after a backup is
+     restored to a new device, these items will be missing.
+     */
+case alwaysThisDeviceOnly
+
+
+3.2 Удаленные комментарии:
+
+Неактуальная подсказка в коде:
+//TODO: remove this hack when PR will be merged
+//https://github.com/mac-cain13/R.swift/pull/673
+
+Бесполезный легаси комментарий:
+//TODO: check
+
+Неинформативный комментарий:
+var valid: Bool {
+    //TODO: add other validations
+}
+
+Избыточное описание методов:
+//MARK: Reusable functions
+
+Избыточное описание методов:
+//MARK: - saving
