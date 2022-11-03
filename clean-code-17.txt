@@ -1,0 +1,49 @@
+1)  Закомментированный код
+//            TODO: Remove after tests
+//        Log.info("WebViewNavigation- AnalyticsSourceData. StartedFrom: \(analyticsSourceData.startedFrom). InnerSource: \(analyticsSourceData.innerSource).")
+
+2) Закомментированный код
+//    override func drawTextInRect(rect: CGRect) {
+//        let insets = UIEdgeInsets.init(top: 0, left: leftInset, bottom: 0, right: rightInset)
+//        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
+//        self.layoutIfNeeded()
+//    }
+
+3) Позиционные маркеры
+//Private API
+
+4) Избыточные комментарии
+//Configuring UI elements
+
+5) Позиционные маркеры
+//Delegate methods
+
+6) Шум
+//Вычисляем значения координат
+
+7) Нелокальная информация
+//Актуальное значение находится в классе PaymentRouter
+
+8) Недостоверные комментарии
+//TODO: удалить после перемещения параметра в массив
+
+9) Бормотание
+//WKProcessPool отключен из-за крэша
+
+10) Слишком много информации
+//Удалили backdrop provider из-за обновления в библиотеке floating panel
+
+11) Избыточные комментарии
+//Цикл для определения выбранного счета
+
+12) Избыточные комментарии
+//Конфигурация экрана по разметке с сервера
+
+13) Шум
+//Удаляем кэш
+
+14) Шум
+//Логгирование ошибок
+
+15)  Избыточные комментарии
+//Проверка координат лица
